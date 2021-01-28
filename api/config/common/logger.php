@@ -2,36 +2,42 @@
 
 declare(strict_types=1);
 
-use Api\Infrastructure\Framework\ErrorHandler\LogHandler;
-use Api\Infrastructure\Framework\ErrorHandler\LogPhpHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 return [
-    LoggerInterface::class => function(ContainerInterface $container) {
+    LoggerInterface::class => static function (ContainerInterface $container) {
+        /**
+         * @psalm-suppress MixedArrayAccess
+         * @psalm-var array{
+         *      debug:bool,
+         *      stderr:bool,
+         *      file:string
+         * } $config
+         */
         $config = $container->get('config')['logger'];
-        $logger = new \Monolog\Logger('API');
-        $logger->pushHandler(new \Monolog\Handler\StreamHandler($config['file']));
-        return $logger;
-    },
 
-    'errorHandler' => function (ContainerInterface $container) {
-        return new LogHandler(
-            $container->get(LoggerInterface::class),
-            $container->get('settings')['displayErrorDetails']
-        );
-    },
+        $level = $config['debug'] ? Logger::DEBUG : Logger::INFO;
 
-    'phpErrorHandler' => function (ContainerInterface $container) {
-        return new LogPhpHandler(
-            $container->get(LoggerInterface::class),
-            $container->get('settings')['displayErrorDetails']
-        );
-    },
+        $log = new Logger('API');
 
+        if ($config['stderr']) {
+            $log->pushHandler(new StreamHandler('php://stderr', $level));
+        }
+
+        if (!empty($config['file'])) {
+            $log->pushHandler(new StreamHandler($config['file'], $level));
+        }
+
+        return $log;
+    },
     'config' => [
         'logger' => [
-            'file' => 'var/log/app.log',
-        ]
+            'debug' => (bool)getenv('APP_DEBUG'),
+            'file' => null,
+            'stderr' => true
+        ],
     ]
 ];

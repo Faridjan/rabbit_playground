@@ -1,27 +1,28 @@
 <?php
 
-use Api\Console\Command;
-use PhpAmqpLib\Connection\AMQPStreamConnection;
-use Psr\Container\ContainerInterface;
+declare(strict_types=1);
+
+use Doctrine\Migrations\Tools\Console\Command\ExecuteCommand;
+use Doctrine\Migrations\Tools\Console\Command\LatestCommand;
+use Doctrine\Migrations\Tools\Console\Command\ListCommand;
+use Doctrine\Migrations\Tools\Console\Command\MigrateCommand;
+use Doctrine\Migrations\Tools\Console\Command\StatusCommand;
+use Doctrine\Migrations\Tools\Console\Command\UpToDateCommand;
+use Doctrine\ORM\Tools\Console\Command\ValidateSchemaCommand;
 
 return [
-    Command\Amqp\ProduceCommand::class => function (ContainerInterface $container) {
-        return new Command\Amqp\ProduceCommand(
-            $container->get(AMQPStreamConnection::class)
-        );
-    },
-    Command\Amqp\ConsumeCommand::class => function (ContainerInterface $container) {
-        return new Command\Amqp\ConsumeCommand(
-            $container->get(AMQPStreamConnection::class)
-        );
-    },
-
     'config' => [
         'console' => [
             'commands' => [
-                Command\Amqp\ProduceCommand::class,
-                Command\Amqp\ConsumeCommand::class,
-            ],
-        ],
-    ],
+                ValidateSchemaCommand::class,
+
+                ExecuteCommand::class,
+                MigrateCommand::class,
+                LatestCommand::class,
+                ListCommand::class,
+                StatusCommand::class,
+                UpToDateCommand::class,
+            ]
+        ]
+    ]
 ];

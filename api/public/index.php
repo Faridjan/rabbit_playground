@@ -2,18 +2,16 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\Dotenv\Dotenv;
+use Psr\Container\ContainerInterface;
+use Slim\App;
 
-chdir(dirname(__DIR__));
-require 'vendor/autoload.php';
+http_response_code(500);
 
-if (file_exists('.env')) {
-    (new Dotenv())->load('.env');
-}
+require_once __DIR__ . '/../vendor/autoload.php';
 
-(function () {
-    $container = require 'config/container.php';
-    $app = new \Slim\App($container);
-    (require 'config/routes.php')($app, $container);
-    $app->run();
-})();
+/** @var ContainerInterface $container */
+$container = require_once __DIR__ . '/../config/container.php';
+
+/** @var App $app */
+$app = (require_once __DIR__ . '/../config/app.php')($container);
+$app->run();

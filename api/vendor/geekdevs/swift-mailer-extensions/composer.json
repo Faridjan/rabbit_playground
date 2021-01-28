@@ -1,0 +1,26 @@
+{
+    "name": "geekdevs/swift-mailer-extensions",
+    "description": "SwiftMailer extensions",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pavel Dubinin",
+            "email": "geekdevs@gmail.com"
+        }
+    ],
+    "keywords": [
+        "swift",
+        "mailer",
+        "extension",
+        "file",
+        "eml"
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "~6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Geekdevs\\SwiftMailer\\": "src/SwiftMailer"
+        }
+    }
+}

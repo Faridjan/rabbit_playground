@@ -1,55 +1,55 @@
 {
-  "name": "faridjan/rabbit_playground",
-  "description": "RabbitMQ Testing",
+  "description": "Slim starter + service",
+  "name": "autokz/sevice_name",
   "minimum-stability": "stable",
   "license": "proprietary",
   "config": {
-    "process-timeout": 0,
     "sort-packages": true
   },
   "require": {
-    "php": "^7.4",
+    "php": ">=7.4",
     "ext-json": "*",
-    "ext-mbstring": "*",
-    "dflydev/fig-cookies": "^2.0",
+    "ext-openssl": "^7.4",
+    "autokz/oauth_proxy": "^1.0",
     "doctrine/migrations": "^3.0",
     "doctrine/orm": "^2.8",
-    "geekdevs/swift-mailer-extensions": "^2.0",
+    "fzaninotto/faker": "^1.9",
     "laminas/laminas-config-aggregator": "^1.4",
-    "laminas/laminas-diactoros": "^2.5",
-    "league/oauth2-server": "^8.2",
-    "monolog/monolog": "^2.2",
-    "php-amqplib/php-amqplib": "^2.12",
+    "monolog/monolog": "^2.1",
     "php-di/php-di": "^6.3",
+    "predis/predis": "^1.1",
     "ramsey/uuid": "^4.1",
     "slim/psr7": "^1.3",
     "slim/slim": "^4.7",
-    "swiftmailer/swiftmailer": "^6.2",
     "symfony/console": "^5.2",
-    "symfony/dotenv": "^5.2",
     "symfony/validator": "^5.2",
     "webmozart/assert": "^1.9"
   },
   "require-dev": {
     "doctrine/data-fixtures": "^1.4",
+    "lctrs/psalm-psr-container-plugin": "^1.1",
     "overtrue/phplint": "^2.3",
     "phpunit/phpunit": "^9.5",
     "psalm/plugin-phpunit": "^0.15.0",
-    "roave/security-advisories": "dev-master",
-    "squizlabs/php_codesniffer": "^3.5"
+    "roave/security-advisories": "dev-latest",
+    "squizlabs/php_codesniffer": "^3.5",
+    "vimeo/psalm": "^4.3"
   },
   "autoload": {
     "psr-4": {
-      "Api\\": "src"
+      "App\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Api\\Test\\": "tests/"
+      "Test\\": "tests/"
     }
   },
-  "scripts": {
-    "app": "php bin/app.php --ansi",
-    "test": "phpunit --colors=always"
-  }
+  "authors": [
+    {
+      "name": "Farid",
+      "email": "farid-n@auto.kz",
+      "homepage": "https://github.com/faridjan"
+    }
+  ]
 }

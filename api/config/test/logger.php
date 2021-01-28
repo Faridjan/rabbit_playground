@@ -5,7 +5,8 @@ declare(strict_types=1);
 return [
     'config' => [
         'logger' => [
-            'file' => 'var/log/test.log',
-        ]
+            'file' => __DIR__ . '/../../var/log/' . PHP_SAPI . '/application.log',
+            'stderr' => false
+        ],
     ]
 ];

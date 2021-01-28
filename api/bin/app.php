@@ -1,44 +1,36 @@
-#!/usr/bin/env php
 <?php
 
 declare(strict_types=1);
 
-use Doctrine\DBAL\Migrations\Tools\Console\Helper\ConfigurationHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
-use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
-chdir(dirname(__DIR__));
-require 'vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
-if (file_exists('.env')) {
-    (new Dotenv())->load('.env');
-}
+/** @var ContainerInterface $container */
+$container = require_once __DIR__ . '/../config/container.php';
 
-/**
- * @var \Psr\Container\ContainerInterface $container
- */
-$container = require 'config/container.php';
+$cli = new Application('Console');
 
-$cli = new Application('Application console');
-
+/** @var EntityManagerInterface $entityManager */
 $entityManager = $container->get(EntityManagerInterface::class);
-$connection = $entityManager->getConnection();
-
-$configuration = new Doctrine\DBAL\Migrations\Configuration\Configuration($connection);
-$configuration->setMigrationsDirectory('src/Data/Migration');
-$configuration->setMigrationsNamespace('Api\Data\Migration');
 
 $cli->getHelperSet()->set(new EntityManagerHelper($entityManager), 'em');
-$cli->getHelperSet()->set(new ConfigurationHelper($connection, $configuration), 'configuration');
 
-Doctrine\ORM\Tools\Console\ConsoleRunner::addCommands($cli);
-Doctrine\DBAL\Migrations\Tools\Console\ConsoleRunner::addCommands($cli);
-
+/**
+ * @var string[] $commands
+ * @psalm-suppress MixedArrayAccess
+ */
 $commands = $container->get('config')['console']['commands'];
-foreach ($commands as $command) {
-    $cli->add($container->get($command));
+foreach ($commands as $name) {
+    /** @var Command $command */
+    $command = $container->get($name);
+    $cli->add($command);
 }
 
-$cli->run();
+$cli->run(new ArgvInput(), new ConsoleOutput());

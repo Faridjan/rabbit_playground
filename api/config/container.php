@@ -2,14 +2,7 @@
 
 declare(strict_types=1);
 
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\ConfigAggregator\PhpFileProvider;
+$builder = new DI\ContainerBuilder();
+$builder->addDefinitions(__DIR__ . '/dependencies.php');
 
-$aggregator = new ConfigAggregator([
-    new PhpFileProvider(__DIR__ . '/common/*.php'),
-    new PhpFileProvider(__DIR__ . '/' . (getenv('API_ENV') ?: 'prod') . '/*.php'),
-]);
-
-$config = $aggregator->getMergedConfig();
-
-return new \Slim\Container($config);
+return $builder->build();
