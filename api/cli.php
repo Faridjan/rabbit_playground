@@ -7,10 +7,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\Psr7\Factory\ServerRequestFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
+$container = require __DIR__ . '/config/container.php';
 
 $redis = new Predis\Client(['host' => 'api-redis']);
 
-$container = require __DIR__ . '/config/container.php';
 $app = (require __DIR__ . '/config/app.php')($container);
 $em = $container->get(EntityManagerInterface::class);
 function json(string $method, string $path, array $body = [], array $headers = []): ServerRequestInterface

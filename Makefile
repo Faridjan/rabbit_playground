@@ -10,7 +10,7 @@ init: down-clear \
 #api-db-init \
 
 api-permissions:
-	docker run --rm -v ${PWD}/api:/app -w /app alpine && sudo sh -c 'mkdir api/var/cache && chmod -R 777 *'
+	docker run --rm -v ${PWD}/api:/app -w /app alpine && sudo sh -c 'chmod -R 777 *'
 api-clear:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine && sudo sh -c 'rm -rf api/var/*'
 api-wait-db:
@@ -40,6 +40,13 @@ pure-docker:
 	docker system prune -af
 get-ip:
 	docker network inspect ${OAUTH_SERVER_NETWORK} | sh -c 'grep -Eoh "(\"Gateway\": \")+[0-9]{1,3}(\.[0-9]{1,3}){3}\""' | sh -c 'grep -Eoh "[0-9]{1,3}(\.[0-9]{1,3}){3}"'
+
+
+#######################  RABBIT-MQ  ##########################
+rabbit-produce:
+	docker-compose run --rm api-php-cli php bin/app.php --ansi amqp:demo:produce bc3d7279-a0bd-47d2-a1bc-f347ef29c94f
+rabbit-consume:
+	docker-compose run --rm api-php-cli php bin/app.php --ansi amqp:demo:consume
 
 
 #######################  DOCTRINE  ##########################

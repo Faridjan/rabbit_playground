@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49fc0e0c4e480e73581855c6841788d5",
+    "content-hash": "3d541530ef7b678227bdd09e3f2eb5cb",
     "packages": [
         {
             "name": "autokz/oauth_proxy",

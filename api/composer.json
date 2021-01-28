@@ -24,6 +24,7 @@
     "slim/slim": "^4.7",
     "symfony/console": "^5.2",
     "symfony/validator": "^5.2",
+    "vlucas/phpdotenv": "^5.3",
     "webmozart/assert": "^1.9"
   },
   "require-dev": {
