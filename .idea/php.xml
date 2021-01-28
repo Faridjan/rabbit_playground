@@ -14,8 +14,6 @@
       <path value="$PROJECT_DIR$/api/vendor/friendsofphp/proxy-manager-lts" />
       <path value="$PROJECT_DIR$/api/vendor/felixfbecker/advanced-json-rpc" />
       <path value="$PROJECT_DIR$/api/vendor/felixfbecker/language-server-protocol" />
-      <path value="$PROJECT_DIR$/api/vendor/swiftmailer/swiftmailer" />
-      <path value="$PROJECT_DIR$/api/vendor/php-amqplib/php-amqplib" />
       <path value="$PROJECT_DIR$/api/vendor/netresearch/jsonmapper" />
       <path value="$PROJECT_DIR$/api/vendor/webimpress/safe-writer" />
       <path value="$PROJECT_DIR$/api/vendor/webmozart/path-util" />
@@ -38,12 +36,7 @@
       <path value="$PROJECT_DIR$/api/vendor/sebastian/resource-operations" />
       <path value="$PROJECT_DIR$/api/vendor/sebastian/environment" />
       <path value="$PROJECT_DIR$/api/vendor/ralouphie/getallheaders" />
-      <path value="$PROJECT_DIR$/api/vendor/phpseclib/phpseclib" />
-      <path value="$PROJECT_DIR$/api/vendor/paragonie/random_compat" />
       <path value="$PROJECT_DIR$/api/vendor/overtrue/phplint" />
-      <path value="$PROJECT_DIR$/api/vendor/lcobucci/clock" />
-      <path value="$PROJECT_DIR$/api/vendor/lcobucci/jwt" />
-      <path value="$PROJECT_DIR$/api/vendor/geekdevs/swift-mailer-extensions" />
       <path value="$PROJECT_DIR$/api/vendor/doctrine/inflector" />
       <path value="$PROJECT_DIR$/api/vendor/doctrine/annotations" />
       <path value="$PROJECT_DIR$/api/vendor/doctrine/common" />
@@ -62,16 +55,12 @@
       <path value="$PROJECT_DIR$/api/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-intl-grapheme" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-php80" />
-      <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-php72" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/stopwatch" />
-      <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-iconv" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/validator" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/api/vendor/symfony/dotenv" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-ctype" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/translation-contracts" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/console" />
       <path value="$PROJECT_DIR$/api/vendor/symfony/polyfill-intl-normalizer" />
@@ -93,21 +82,15 @@
       <path value="$PROJECT_DIR$/api/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/api/vendor/laminas/laminas-code" />
       <path value="$PROJECT_DIR$/api/vendor/laminas/laminas-zendframework-bridge" />
-      <path value="$PROJECT_DIR$/api/vendor/laminas/laminas-diactoros" />
       <path value="$PROJECT_DIR$/api/vendor/laminas/laminas-config-aggregator" />
       <path value="$PROJECT_DIR$/api/vendor/laminas/laminas-stdlib" />
       <path value="$PROJECT_DIR$/api/vendor/laminas/laminas-eventmanager" />
-      <path value="$PROJECT_DIR$/api/vendor/egulias/email-validator" />
       <path value="$PROJECT_DIR$/api/vendor/dnoegel/php-xdg-base-dir" />
-      <path value="$PROJECT_DIR$/api/vendor/dflydev/fig-cookies" />
       <path value="$PROJECT_DIR$/api/vendor/ramsey/collection" />
       <path value="$PROJECT_DIR$/api/vendor/ramsey/uuid" />
       <path value="$PROJECT_DIR$/api/vendor/php-di/php-di" />
       <path value="$PROJECT_DIR$/api/vendor/php-di/phpdoc-reader" />
       <path value="$PROJECT_DIR$/api/vendor/php-di/invoker" />
-      <path value="$PROJECT_DIR$/api/vendor/league/event" />
-      <path value="$PROJECT_DIR$/api/vendor/league/oauth2-server" />
-      <path value="$PROJECT_DIR$/api/vendor/defuse/php-encryption" />
       <path value="$PROJECT_DIR$/api/vendor/vimeo/psalm" />
       <path value="$PROJECT_DIR$/api/vendor/psalm/plugin-phpunit" />
       <path value="$PROJECT_DIR$/api/vendor/nikic/php-parser" />
@@ -127,6 +110,17 @@
       <path value="$PROJECT_DIR$/api/vendor/psr/http-message" />
       <path value="$PROJECT_DIR$/api/vendor/n98/junit-xml" />
       <path value="$PROJECT_DIR$/api/vendor/fig/http-message-util" />
+      <path value="$PROJECT_DIR$/api/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/api/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/api/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/api/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/api/vendor/autokz/oauth_proxy" />
+      <path value="$PROJECT_DIR$/api/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/api/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/api/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/api/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/api/vendor/lctrs/psalm-psr-container-plugin" />
+      <path value="$PROJECT_DIR$/api/vendor/predis/predis" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
