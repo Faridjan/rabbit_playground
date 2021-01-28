@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Action\Post;
 
-
 use App\Http\Response\JsonResponse;
 use App\Model\Post\Command\Add\Handler;
 use Psr\Http\Message\ServerRequestInterface;

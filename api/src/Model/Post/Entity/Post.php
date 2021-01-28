@@ -51,6 +51,4 @@ class Post
     {
         return $this->description;
     }
-
-
 }

@@ -3,16 +3,16 @@ OAUTH_SERVER_NETWORK = "sso-oauth2-server_default"
 
 #######################  INITIONs  ##########################
 init: down-clear \
-	api-clear api-permissions \
+	api-permissions api-clear \
 	pull build up\
 	composer-i \
 #	api-check
 #api-db-init \
 
+api-permissions:
+	docker run --rm -v ${PWD}/api:/app -w /app alpine && sudo sh -c 'mkdir api/var/cache && chmod -R 777 *'
 api-clear:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine && sudo sh -c 'rm -rf api/var/*'
-api-permissions:
-	docker run --rm -v ${PWD}/api:/app -w /app alpine && sudo sh -c 'chmod -R 777 *'
 api-wait-db:
 	docker-compose run --rm api-php-cli wait-for-it api-postgres:5432 -t 30
 api-db-init: api-wait-db \
