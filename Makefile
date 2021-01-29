@@ -47,6 +47,8 @@ rabbit-produce:
 	docker-compose run --rm api-php-cli php bin/app.php --ansi amqp:demo:produce bc3d7279-a0bd-47d2-a1bc-f347ef29c94f
 rabbit-consume:
 	docker-compose run --rm api-php-cli php bin/app.php --ansi amqp:demo:consume
+rabbit-consume-mail:
+	docker-compose run --rm api-php-cli php bin/app.php --ansi amqp:demo:consume-mail
 
 
 #######################  DOCTRINE  ##########################

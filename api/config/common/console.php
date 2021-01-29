@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Console\Amqp\ConsumeCommand;
+use App\Console\Amqp\ConsumeMailCommand;
 use App\Console\Amqp\ProduceCommand;
 use Doctrine\Migrations\Tools\Console\Command\ExecuteCommand;
 use Doctrine\Migrations\Tools\Console\Command\LatestCommand;
@@ -26,6 +27,13 @@ return [
         );
     },
 
+    ConsumeMailCommand::class => function (ContainerInterface $container) {
+        return new ConsumeMailCommand(
+            $container->get(AMQPStreamConnection::class),
+            $container->get(Swift_Mailer::class)
+        );
+    },
+
     'config' => [
         'console' => [
             'commands' => [
@@ -33,6 +41,7 @@ return [
 
                 ProduceCommand::class,
                 ConsumeCommand::class,
+                ConsumeMailCommand::class,
 
                 ExecuteCommand::class,
                 MigrateCommand::class,

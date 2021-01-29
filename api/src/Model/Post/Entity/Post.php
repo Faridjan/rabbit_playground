@@ -21,7 +21,7 @@ class Post
     private UUIDType $id;
 
     /**
-     * @ORM\Column(unique=true)
+     * @ORM\Column()
      */
     private string $title;
 

@@ -26,7 +26,9 @@ class ProduceCommand extends Command
     {
         $this
             ->setName('amqp:demo:produce')
-            ->addArgument('user_id', InputArgument::REQUIRED);
+            ->addArgument('user_id', InputArgument::REQUIRED)
+            ->addArgument('mail', InputArgument::REQUIRED)
+            ->addArgument('type', InputArgument::REQUIRED);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -41,9 +43,9 @@ class ProduceCommand extends Command
         AMQPHelper::registerShutdown($connection, $channel);
 
         $data = [
-            'type' => 'notification',
+            'type' => $input->getArgument('type'),
             'user_id' => $input->getArgument('user_id'),
-            'message' => 'Hello!',
+            'mail' => $input->getArgument('mail'),
         ];
 
         $message = new AMQPMessage(

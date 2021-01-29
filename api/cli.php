@@ -2,57 +2,54 @@
 
 declare(strict_types=1);
 
-use Doctrine\ORM\EntityManagerInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Slim\Psr7\Factory\ServerRequestFactory;
+use App\Console\Amqp\ProduceCommand;
+use App\Model\Type\UUIDType;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Tester\CommandTester;
 
 require_once __DIR__ . '/vendor/autoload.php';
-$container = require __DIR__ . '/config/container.php';
 
-$redis = new Predis\Client(['host' => 'api-redis']);
+$container = require_once __DIR__ . '/config/container.php';
 
-$app = (require __DIR__ . '/config/app.php')($container);
-$em = $container->get(EntityManagerInterface::class);
-function json(string $method, string $path, array $body = [], array $headers = []): ServerRequestInterface
-{
-    $request = (new ServerRequestFactory())->createServerRequest($method, $path, ['REMOTE_ADDR' => '99.99.99.99'])
-        ->withHeader('Accept', 'application/json')
-        ->withHeader('Content-Type', 'application/json');
+$application = new Application();
 
-    foreach ($headers as $name => $value) {
-        $request = $request->withHeader($name, $value);
+$command = $application->add(new ProduceCommand($container->get(AMQPStreamConnection::class)));
+$commandTester = new CommandTester($command);
+
+
+$transport = (new Swift_SmtpTransport('mailer', 1025))
+    ->setUsername('app')
+    ->setPassword('secret')
+    ->setEncryption('tcp');
+
+$mailer = new Swift_Mailer($transport);
+
+$message = (new Swift_Message('Test message'))
+    ->setFrom('app@auto.kz')
+    ->setTo('fred@mail.ru')
+    ->setBody('Test message');
+
+
+for ($i = 1; $i <= 1000; $i++) {
+    sleep(rand(1, 3));
+    if ($mailer->send($message)) {
+        $commandTester->execute(
+            [
+                'command' => $command->getName(),
+                'type' => 'send_mail.success',
+                'user_id' => UUIDType::generate()->getValue(),
+                'mail' => $message->getBody()
+            ]
+        );
+    } else {
+        $commandTester->execute(
+            [
+                'command' => $command->getName(),
+                'type' => 'send_mail.error',
+                'user_id' => UUIDType::generate()->getValue(),
+                'mail' => $message->getBody()
+            ]
+        );
     }
-    $request->getBody()->write(json_encode($body, JSON_THROW_ON_ERROR));
-
-    return $request;
 }
-
-
-$startTime = microtime(true);
-
-
-// ADD Doctrine...
-//for ($i = 1; $i <= 10000; $i++) {
-//    $app->handle(json('POST', '/add', ['title' => "Post #$i", 'description' => "Description #$i"]));
-//    $em->getConnection()->close();
-//}
-
-// ADD Redis...
-//for ($i = 1; $i <= 10000; $i++) {
-//    $data = ['id' => 'cc24f3af-e537-49a5-8adc-a515d13620a4', "Title $i", "Description $i"];
-//    $redis->hSet("post:post$i", 'data', serialize($data));
-//}
-
-// GET Doctrine...
-$response = $app->handle(json('GET', '/'));
-$content = json_decode((string)$response->getBody(), true);
-print_r(count($content));
-echo PHP_EOL;
-
-// GET Redis...
-//for ($i = 1; $i <= 10000; $i++) {
-//    $redis->hget("post:post$i", 'data');
-//}
-
-$endTime = microtime(true);
-echo date("H:i:s:m", (int)$endTime - (int)$startTime) . PHP_EOL;

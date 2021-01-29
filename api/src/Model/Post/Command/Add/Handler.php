@@ -32,5 +32,6 @@ class Handler
 
         $this->repository->add($post);
         $this->flusher->flush();
+
     }
 }
